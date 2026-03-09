@@ -518,9 +518,6 @@ body {
     display: flex;
     align-items: stretch;
     gap: 0;
-    overflow-x: auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
 }
 
 .schedule-items::-webkit-scrollbar {
@@ -530,8 +527,13 @@ body {
 .sc-item {
     flex: 1;
     min-width: 150px;
-    padding: 24px 28px;
+    padding: 28px 32px;
     border-right: 1px solid rgba(10,10,10,0.12);
+    transition: background 0.3s ease;
+}
+
+.sc-item:hover {
+    background: rgba(10,10,10,0.03);
 }
 
 .sc-item:last-child {
@@ -539,21 +541,21 @@ body {
 }
 
 .sc-freq {
-    font-size: 0.68rem;
-    font-weight: 500;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: rgba(10,10,10,0.5);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .sc-name {
     font-family: var(--font-sans);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--black);
-    margin-bottom: 6px;
-    line-height: 1.3;
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
 .sc-dur {
@@ -1089,8 +1091,20 @@ body {
     }
 
     .schedule-items {
-        flex-wrap: nowrap;
-        padding-bottom: 12px;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .sc-item {
+        min-width: auto;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(10,10,10,0.12);
+        padding: 24px 20px;
+    }
+
+    .sc-item:last-child {
+        border-bottom: none;
     }
 
     .phase-block {
@@ -1188,6 +1202,38 @@ body {
 
     .nav-links {
         display: none;
+    }
+
+    /* 每周课程安排手机端优化 */
+    .schedule-items {
+        flex-direction: column;
+    }
+
+    .sc-item {
+        width: 100%;
+        min-width: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(10,10,10,0.12);
+        padding: 28px 24px;
+    }
+
+    .sc-item:last-child {
+        border-bottom: none;
+    }
+
+    .sc-freq {
+        font-size: 0.72rem;
+        margin-bottom: 12px;
+    }
+
+    .sc-name {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    .sc-dur {
+        font-size: 0.85rem;
     }
 
     .mod-header {
