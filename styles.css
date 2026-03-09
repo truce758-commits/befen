@@ -500,24 +500,51 @@ body {
    Schedule Banner
    ============================================================ */
 .schedule-banner {
-    padding: 80px 0;
-    background: var(--gold);
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-mid) 100%);
+    position: relative;
     overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.schedule-banner::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.schedule-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 60%);
+    pointer-events: none;
 }
 
 .schedule-banner .section-tag {
-    color: rgba(10,10,10,0.55);
-    margin-bottom: 36px;
+    color: var(--gold);
+    margin-bottom: 48px;
 }
 
 .schedule-banner .section-tag::after {
-    background: rgba(10,10,10,0.55);
+    background: var(--gold);
 }
 
 .schedule-items {
     display: flex;
     align-items: stretch;
-    gap: 0;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .schedule-items::-webkit-scrollbar {
@@ -526,43 +553,63 @@ body {
 
 .sc-item {
     flex: 1;
-    min-width: 150px;
-    padding: 28px 32px;
-    border-right: 1px solid rgba(10,10,10,0.12);
-    transition: background 0.3s ease;
+    min-width: 180px;
+    padding: 32px 28px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.sc-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    opacity: 0;
+    transition: opacity var(--transition);
 }
 
 .sc-item:hover {
-    background: rgba(10,10,10,0.03);
+    background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.04) 100%);
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-.sc-item:last-child {
-    border-right: none;
+.sc-item:hover::before {
+    opacity: 1;
 }
 
 .sc-freq {
     font-size: 0.7rem;
     font-weight: 600;
-    color: rgba(10,10,10,0.5);
-    letter-spacing: 0.12em;
+    color: var(--gold-light);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    display: inline-block;
 }
 
 .sc-name {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 8px;
-    line-height: 1.4;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.5;
 }
 
 .sc-dur {
     font-family: var(--font-serif);
     font-size: 1.6rem;
     font-weight: 300;
-    color: rgba(10,10,10,0.7);
+    color: var(--gold);
     letter-spacing: -0.01em;
 }
 
@@ -571,7 +618,7 @@ body {
     align-items: center;
     font-family: var(--font-serif);
     font-size: 1.5rem;
-    color: rgba(10,10,10,0.3);
+    color: var(--border-light);
     padding: 0 8px;
     flex-shrink: 0;
 }
@@ -1092,19 +1139,18 @@ body {
 
     .schedule-items {
         flex-direction: column;
-        gap: 0;
+        gap: 12px;
     }
 
     .sc-item {
-        min-width: auto;
         width: 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(10,10,10,0.12);
-        padding: 24px 20px;
+        min-width: auto;
+        padding: 20px 18px;
+        background: rgba(255,255,255,0.04);
     }
 
-    .sc-item:last-child {
-        border-bottom: none;
+    .sc-item:hover {
+        background: rgba(255,255,255,0.06);
     }
 
     .phase-block {
@@ -1205,35 +1251,67 @@ body {
     }
 
     /* 每周课程安排手机端优化 */
+    .schedule-banner {
+        padding: 80px 0;
+    }
+
     .schedule-items {
         flex-direction: column;
+        gap: 16px;
     }
 
     .sc-item {
         width: 100%;
         min-width: auto;
-        border-right: none;
-        border-bottom: 1px solid rgba(10,10,10,0.12);
         padding: 28px 24px;
+        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.03) 100%);
     }
 
-    .sc-item:last-child {
-        border-bottom: none;
+    .sc-item:nth-child(1) {
+        transform: translateX(-8px);
+    }
+
+    .sc-item:nth-child(2) {
+        transform: translateX(8px);
+    }
+
+    .sc-item:nth-child(3) {
+        transform: translateX(-4px);
+    }
+
+    .sc-item:nth-child(4) {
+        transform: translateX(6px);
+    }
+
+    .sc-item:nth-child(5) {
+        transform: translateX(-6px);
+    }
+
+    .sc-item:hover {
+        transform: translateX(0) translateY(-4px);
     }
 
     .sc-freq {
-        font-size: 0.72rem;
-        margin-bottom: 12px;
+        font-size: 0.68rem;
+        margin-bottom: 10px;
+        background: rgba(212,175,55,0.15);
+        padding: 4px 12px;
+        border-radius: 12px;
+        display: inline-block;
     }
 
     .sc-name {
-        font-size: 1rem;
+        font-size: 1.05rem;
         margin-bottom: 10px;
-        line-height: 1.5;
+        line-height: 1.4;
     }
 
     .sc-dur {
-        font-size: 0.85rem;
+        font-size: 1.4rem;
+    }
+
+    .sc-divider {
+        display: none;
     }
 
     .mod-header {
